@@ -45,12 +45,28 @@ while True:
         # ESC pressed
         print("Escape hit, closing...")
         break
-    elif k%256 == 32:
-        # SPACE pressed
+    elif k % 256 == 97:
+        # a pressed - Getting on the Bus
         img_name = "opencv_frame_{}.png".format(img_counter)
         cv2.imwrite(img_name, frame)
         print("{} written!".format(img_name))
-        # img_counter += 1
+        face_encodings = []
+        
+        for image in os.listdir(filepath):
+            image_path = os.path.join(filepath, image)
+            known_image = face_recognition.load_image_file(image_path)
+            unknown_image = face_recognition.load_image_file(img_name)
+
+
+            unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
+        for face in known_face_encodings :  
+            result = face_recognition.compare_faces([face], unknown_encoding)
+            print(result)
+    elif k % 256 == 100:
+        # d pressed - Getting Off the Bus
+        img_name = "opencv_frame_{}.png".format(img_counter)
+        cv2.imwrite(img_name, frame)
+        print("{} written!".format(img_name))
         face_encodings = []
         
         for image in os.listdir(filepath):
