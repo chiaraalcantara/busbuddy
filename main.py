@@ -41,6 +41,13 @@ while True:
     if not ret:
         print("failed to grab frame")
         break
+    # cv2.imshow("test", frame)
+    font = cv2.FONT_HERSHEY_SIMPLEX
+    org = (50, 50)
+    font_scale = 1
+    color = (0, 255, 0)  # Green color
+    thickness = 2
+    cv2.putText(frame, str(stop), org, font, font_scale, color, thickness, cv2.LINE_AA)
     cv2.imshow("test", frame)
 
     k = cv2.waitKey(1)
@@ -55,30 +62,26 @@ while True:
         print("{} written!".format(img_name))
         face_encodings = []
         
-        # for image in os.listdir(filepath):
-        #     image_path = os.path.join(filepath, image)
-        #     known_image = face_recognition.load_image_file(image_path)
-            
+         
         unknown_image = face_recognition.load_image_file(img_name)
         unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
         for face in known_face_encodings :  
             result = face_recognition.compare_faces([face], unknown_encoding)
             print(result)
-            if(result == "True") :
-                text = "Face jjjjjjj"
+            if result[0]:
+                text = "WELCOME/GOODBYE!"
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 org = (50, 50)
                 font_scale = 1
                 color = (0, 255, 0)  # Green color
                 thickness = 2
-
                 cv2.putText(frame, text, org, font, font_scale, color, thickness, cv2.LINE_AA)
                 cv2.imshow("test", frame)
                 cv2.waitKey(2000)  # Display the text for 2 seconds
-    # elif k % 256 == 115: 
-    #     stop+=1
-    #     # TODO: Change to Text on Screen 
-    #     print("Going to stop number:", stop)
+    elif k % 256 == 115: 
+        stop+=1
+        # TODO: Change to Text on Screen 
+        print("Going to stop number:", stop)
 
 
 
