@@ -71,6 +71,9 @@ while True:
                 print(result)
                 # If true, puts text on CV Window Welcome or Goodbye depending on getting on or off the bus
                 if result[0] : 
+                    # Check if getting on the bus, if it is the right bus
+                    # Check if getting off the bus, if it is the right stop
+                    
                     text = "Welcome/Goodbye!" # TODO add the name
                     cv2.putText(frame, text, (175, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
                     cv2.imshow("test", frame)
