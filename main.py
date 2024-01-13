@@ -20,8 +20,6 @@ img_counter = 0
 # Initialize Image List 
 known_face_encodings = []
 
-img_counter = 0
-
 for file in os.listdir(filepath):
     filename = os.fsdecode(file)
     if filename.endswith(".jpg"):
@@ -41,13 +39,10 @@ while True:
     if not ret:
         print("failed to grab frame")
         break
-    # cv2.imshow("test", frame)
-    font = cv2.FONT_HERSHEY_SIMPLEX
-    org = (50, 50)
-    font_scale = 1
-    color = (0, 255, 0)  # Green color
-    thickness = 2
-    cv2.putText(frame, str(stop), org, font, font_scale, color, thickness, cv2.LINE_AA)
+    # TODO Check for end of stop and end the program once 
+    cv2.putText(frame, "Current Stop: " + str(stop), (25, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+    if (stop == 3) : cv2.putText(frame, "End of Route", (400, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+    else : cv2.putText(frame, "Next Stop: " + str(stop + 1), (400, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
     cv2.imshow("test", frame)
 
     k = cv2.waitKey(1)
@@ -57,12 +52,12 @@ while True:
         break
     elif k % 256 == 32:
         # Space pressed 
-        img_name = "opencv_frame_{}.png".format(img_counter)
+        img_name = "opencv_frame_0.png" 
         cv2.imwrite(img_name, frame)
         print("{} written!".format(img_name))
         face_encodings = []
         
-         
+        # Creating the unknown image 
         unknown_image = face_recognition.load_image_file(img_name)
         unknown_locations = face_recognition.face_locations(unknown_image)
         if (len(unknown_locations) > 0):
@@ -70,20 +65,19 @@ while True:
             for face in known_face_encodings :  
                 result = face_recognition.compare_faces([face], unknown_encoding)
                 print(result)
-                if(result == "True") :
-                    text = "Face jjjjjjj"
-                    font = cv2.FONT_HERSHEY_SIMPLEX
-                    org = (50, 50)
-                    font_scale = 1
-                    color = (0, 255, 0)  # Green color
-                    thickness = 2
-
-                    cv2.putText(frame, text, org, font, font_scale, color, thickness, cv2.LINE_AA)
+                # If true, outputs Welcome or Goodbye depending on getting on or off the bus
+                if result[0] : 
+                    text = "Welcome/Goodbye!" # TODO add the name
+                    # Text on the Screen
+                    cv2.putText(frame, text, (175, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
                     cv2.imshow("test", frame)
-                    cv2.waitKey(2000)  # Display the text for 2 seconds
+                    cv2.waitKey(3000)  # Display the text for 2 seconds
         else: 
             # TODO: Change to Text on Screen 
             print("Please move into the frame")
+            text = "Please move into the frame"
+            cv2.putText(frame, "Please move into the frame", (150, 250), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+            cv2.imshow("test", frame)
     elif k % 256 == 115: 
         stop+=1
         # TODO: Change to Text on Screen 
