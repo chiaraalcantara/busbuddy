@@ -83,7 +83,7 @@ while True:
                 result = face_recognition.compare_faces([face], unknown_encoding)
                 print(result)
                 # the id we need is called encodedimage     
-                select_imageid 
+                # select_imageid 
                 # If true, puts text on CV Window Welcome or Goodbye depending on getting on or off the bus
                 if result[0] : 
                     # Check if getting on the bus, if it is the right bus
