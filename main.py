@@ -20,6 +20,8 @@ img_counter = 0
 # Initialize Image List 
 known_face_encodings = []
 
+img_counter = 0
+
 for file in os.listdir(filepath):
     filename = os.fsdecode(file)
     if filename.endswith(".jpg"):
@@ -45,42 +47,33 @@ while True:
         # ESC pressed
         print("Escape hit, closing...")
         break
-    elif k % 256 == 97:
-        # a pressed - Getting on the Bus
+    elif k % 256 == 32:
+        # Space pressed 
         img_name = "opencv_frame_{}.png".format(img_counter)
         cv2.imwrite(img_name, frame)
         print("{} written!".format(img_name))
         face_encodings = []
         
-        for image in os.listdir(filepath):
-            image_path = os.path.join(filepath, image)
-            known_image = face_recognition.load_image_file(image_path)
-            unknown_image = face_recognition.load_image_file(img_name)
-
-
-            unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
+        # for image in os.listdir(filepath):
+        #     image_path = os.path.join(filepath, image)
+        #     known_image = face_recognition.load_image_file(image_path)
+            
+        unknown_image = face_recognition.load_image_file(img_name)
+        unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
         for face in known_face_encodings :  
             result = face_recognition.compare_faces([face], unknown_encoding)
             print(result)
-    elif k % 256 == 100:
-        # d pressed - Getting Off the Bus
-        img_name = "opencv_frame_{}.png".format(img_counter)
-        cv2.imwrite(img_name, frame)
-        print("{} written!".format(img_name))
-        face_encodings = []
-        
-        for image in os.listdir(filepath):
-            image_path = os.path.join(filepath, image)
-            known_image = face_recognition.load_image_file(image_path)
-            unknown_image = face_recognition.load_image_file(img_name)
+            if(result == "True") :
+                text = "Face Detected"
+                font = cv2.FONT_HERSHEY_SIMPLEX
+                org = (50, 50)
+                font_scale = 1
+                color = (0, 255, 0)  # Green color
+                thickness = 2
 
-
-            unknown_encoding = face_recognition.face_encodings(unknown_image)[0]
-        for face in known_face_encodings :  
-            result = face_recognition.compare_faces([face], unknown_encoding)
-            print(result)
-
-
+                cv2.putText(frame, text, org, font, font_scale, color, thickness, cv2.LINE_AA)
+                cv2.imshow("test", frame)
+                cv2.waitKey(2000)  # Display the text for 2 seconds
 
 cam.release()
 cv2.destroyAllWindows()
