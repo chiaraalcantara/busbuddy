@@ -40,9 +40,13 @@ while True:
         print("failed to grab frame")
         break
     # TODO Check for end of stop and end the program once 
-    cv2.putText(frame, "Current Stop: " + str(stop), (25, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-    if (stop == 3) : cv2.putText(frame, "End of Route", (400, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-    else : cv2.putText(frame, "Next Stop: " + str(stop + 1), (400, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+    # Hard Code route length as 3
+    if stop < 3: 
+        cv2.putText(frame, "Current Stop: " + str(stop), (25, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+        cv2.putText(frame, "Next Stop: " + str(stop + 1), (400, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+    elif stop == 3:
+        cv2.putText(frame, "Current Stop: " + str(stop), (25, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+    else : break
     cv2.imshow("test", frame)
 
     k = cv2.waitKey(1)
@@ -65,25 +69,19 @@ while True:
             for face in known_face_encodings :  
                 result = face_recognition.compare_faces([face], unknown_encoding)
                 print(result)
-                # If true, outputs Welcome or Goodbye depending on getting on or off the bus
+                # If true, puts text on CV Window Welcome or Goodbye depending on getting on or off the bus
                 if result[0] : 
                     text = "Welcome/Goodbye!" # TODO add the name
-                    # Text on the Screen
                     cv2.putText(frame, text, (175, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
                     cv2.imshow("test", frame)
                     cv2.waitKey(3000)  # Display the text for 2 seconds
         else: 
-            # TODO: Change to Text on Screen 
-            print("Please move into the frame")
-            text = "Please move into the frame"
-            cv2.putText(frame, "Please move into the frame", (150, 250), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+            text = "Please move into the frame!"
+            cv2.putText(frame, text, (50, 250), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
             cv2.imshow("test", frame)
+            cv2.waitKey(500)  # Display the text for 2 seconds
     elif k % 256 == 115: 
         stop+=1
-        # TODO: Change to Text on Screen 
-        print("Going to stop number:", stop)
-
-
 
 cam.release()
 cv2.destroyAllWindows()
