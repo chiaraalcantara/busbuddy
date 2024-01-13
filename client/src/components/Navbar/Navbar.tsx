@@ -11,8 +11,8 @@ const links = [
 const Navbar = () => {
     return (
         // the green and w/o is just temp chnage later
-        <header className="w-full fixed top-0 left-0 z-auto bg-green-300 shadow-xl">
-            <nav className='flex justify-between items-center gap-x-4 px-4 h-[50px]'>
+        <header className="w-full fixed top-0 left-0 z-1000 bg-green-300 shadow-xl">
+            <nav className='flex justify-between container items-center gap-x-4 px-4 h-[50px]'>
                 <h1 className="font-bold text-lg">Magic School Bus xD</h1>
                 <ul className="flex gap-x-8">
                     {links.map((link, index) => (
