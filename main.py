@@ -34,6 +34,7 @@ for file in os.listdir(filepath):
     else:
         continue
 
+stop = 0
 
 while True:
     ret, frame = cam.read()
@@ -64,7 +65,7 @@ while True:
             result = face_recognition.compare_faces([face], unknown_encoding)
             print(result)
             if(result == "True") :
-                text = "Face Detected"
+                text = "Face jjjjjjj"
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 org = (50, 50)
                 font_scale = 1
@@ -74,6 +75,12 @@ while True:
                 cv2.putText(frame, text, org, font, font_scale, color, thickness, cv2.LINE_AA)
                 cv2.imshow("test", frame)
                 cv2.waitKey(2000)  # Display the text for 2 seconds
+    # elif k % 256 == 115: 
+    #     stop+=1
+    #     # TODO: Change to Text on Screen 
+    #     print("Going to stop number:", stop)
+
+
 
 cam.release()
 cv2.destroyAllWindows()
