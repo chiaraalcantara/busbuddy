@@ -6,11 +6,11 @@ const Home = () => {
     <section className="home section min-h-screen">
       {/* Use flex, flex-col, items-center, and justify-center to center the content */}
       <div className="flex flex-col items-center justify-center h-full mt-24">
-        <h1 className="text-4xl font-bold mb-4">BusBuddy</h1>
-        <p className="mb-10">
+        <h1 className="text-4xl font-bold mb-2">BusBuddy</h1>
+        <p className="mb-8">
           Safe Rides, Happy Landings.
         </p>
-        <img src="/BusBuddy.png" alt="BusBuddy Logo" className="w-64 rounded-full mb-2"/>
+        <img src="/BusBuddy.png" alt="BusBuddy Logo" className="w-64 rounded-full mb-8"/>
         <h1 className="mb-4 text-lg font-semibold"> Welcome to BusBuddies, the digital safety protection for your children on public transportation. </h1>
       </div>
     </section>
