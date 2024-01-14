@@ -2,12 +2,13 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar/Navbar';
 import Login from './components/Login/Login';
 import './App.css';
+import UserProvider from './components/Contexts/UserProvider';
 
 
 function App() {
 
   return (
-    <>
+    <UserProvider>
       <Router>
         <div className="App">
           <Navbar />
@@ -19,7 +20,7 @@ function App() {
           </Routes>
         </div>
       </Router>
-    </>
+    </UserProvider>
   )
 }
 

@@ -1,44 +1,20 @@
-import React, { useState, useEffect, createContext, ReactNode, FC } from 'react';
+import { createContext, Dispatch, SetStateAction } from "react";
 
-// Define a type for the user state
-type UserState = {
-  uid: string;
-} | null;
+// Define an interface for the context value
+interface UserContextType {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  user: any; // Replace 'any' with a more specific type for your user, if available
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setUser: Dispatch<SetStateAction<any>>; // Replace 'any' with the specific type for your user
+}
 
-// Define a type for the context
-type UserContextType = {
-  user: UserState;
-  setUser: React.Dispatch<React.SetStateAction<UserState>>;
-};
-
-// Create the context with a default value
-const UserContext = createContext<UserContextType>({
+// Provide a default value for the context
+const defaultValue: UserContextType = {
   user: null,
-  setUser: () => {}, // Placeholder function
-});
-
-// Define a type for the props of UserProvider
-type UserProviderProps = {
-  children: ReactNode;
+  setUser: () => {},
 };
 
-// UserProvider component with typed props
-export const UserProvider: FC<UserProviderProps> = ({ children }) => {
-  // Initialize user state from localStorage
-  const initialUser: UserState = JSON.parse(localStorage.getItem('user')!) || null;
-
-  const [user, setUser] = useState<UserState>(initialUser);
-
-  // Use useEffect to update localStorage whenever user state changes
-  useEffect(() => {
-    if (user) {
-      localStorage.setItem('user', JSON.stringify(user));
-    } else {
-      localStorage.removeItem('user');
-    }
-  }, [user]);
-
-  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;
-};
+// Create the context with the default value
+const UserContext = createContext<UserContextType>(defaultValue);
 
 export default UserContext;

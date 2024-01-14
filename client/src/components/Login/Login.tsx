@@ -14,12 +14,13 @@ const Login = () => {
     const logOutUser = async () => {
         try{
             await signOut(auth);
+            setUser(null);
         } catch (error){
             console.log(error);
         }
     }
     
-    const signInUser = async () =>{
+    const signInUser = async () => {
         try {
             const googleInfo = await signInWithPopup(auth, googleAuthProvider);
             
@@ -35,18 +36,17 @@ const Login = () => {
         
               if (snapshot.exists()) {
                 const userData = snapshot.data();
-                setUser({ ...userObj });
               } else {
                 await setDoc(ref, { ...userObj });
-                setUser({ ...userObj });
               }
+              setUser({ ...userObj });
         } catch (error) {
             console.log(error);
         }
     }
   
     return (
-        <section className="login section">
+        <section className="login section items-center">
             <div className='flex flex-col items-center justify-center'>            
                 <h1 className='text-lg font-semibold'>Login Here</h1>
                 <Button 
