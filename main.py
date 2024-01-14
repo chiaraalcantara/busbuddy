@@ -3,42 +3,7 @@ import cv2
 import os
 from os import listdir
 from sqlalchemy import create_engine
-
-# railway url
-railway_database_url = "postgresql://postgres:3df35D-fc6ECd4g151d-Agdc25gAC3F6@viaduct.proxy.rlwy.net:53889/railway"
-
-# create the SQLAlchemy engine
-engine = create_engine(railway_database_url)
-
-# execute a SELECT query to fetch "id" and "encoded_image" (should be BYTEA) from "busdata"
-query = "SELECT id, encoded_image FROM busdata"
-
-try:
-    result = engine.execute(query)
-
-    # Fetch all rows
-    rows = result.fetchall()
-
-    # Print the "id" and "encoded_image" fields for each row
-    for row in rows:
-        print(f"ID: {row['id']}")
-        print(f"Encoded Image: {row['encoded_image']}")
-        print()
-
-except Exception as e:
-    print(f"Error: {e}")
-
-finally:
-    # Close the result set
-    if 'result' in locals():
-        result.close()
-
-    # Close the engine
-    engine.dispose()
-
-
 import base64, binascii
-
 
 #   TODO Import images from database 
 
@@ -70,18 +35,66 @@ known_face_encodings = {}
 # For time being, we hard code bus 29
 
 # Filter first by bus number, then length of that bus number column
-for i in range(3) : # Grab length of column
-    base64_string = "HELENA STRING" #TODO from the database
-    try:
-        image = base64.b64decode(base64_string, validate=True)
-        file_to_save = "name or path of the file to save, let's say, my_image.png"
-        with open(file_to_save, "wb") as f:
-            f.write(image)
-        known_image = face_recognition.load_image_file(image)
-        image_encoding = face_recognition.face_encodings(image)[0]
-        known_face_encodings[image_encoding] = # Name of Child of the same row
-    except binascii.Error as e:
-        print(e)
+# for i in range(3) : # Grab length of column
+#     base64_string = "HELENA STRING" #TODO from the database
+#     try:
+#         image = base64.b64decode(base64_string, validate=True)
+#         file_to_save = "name or path of the file to save, let's say, my_image.png"
+#         with open(file_to_save, "wb") as f:
+#             f.write(image)
+#         known_image = face_recognition.load_image_file(image)
+#         image_encoding = face_recognition.face_encodings(image)[0]
+#         known_face_encodings[image_encoding] = # Name of Child of the same row
+#     except binascii.Error as e:
+#         print(e)
+# Initialize Image Dictionary 
+known_face_encodings = {}
+
+# railway url
+railway_database_url = "postgresql://postgres:3df35D-fc6ECd4g151d-Agdc25gAC3F6@viaduct.proxy.rlwy.net:53889/railway"
+
+# create the SQLAlchemy engine
+engine = create_engine(railway_database_url)
+
+# execute a SELECT query to fetch "id" and "encoded_image" (should be BYTEA) from "busdata"
+query = "SELECT id, encoded_image FROM busdata"
+
+try:
+    result = engine.execute(query)
+
+    # Fetch all rows
+    rows = result.fetchall()
+
+    # Print the "id" and "encoded_image" fields for each row
+    for row in rows:
+        base64_string = row['encoded_image']
+        try:
+            image = base64.b64decode(base64_string, validate=True)
+            file_to_save = f"image_{row['id']}.png"  # Use a unique identifier in the file name
+            with open(file_to_save, "wb") as f:
+                f.write(image)
+            known_image = face_recognition.load_image_file(file_to_save)
+            print('before')
+            image_encoding = face_recognition.face_encodings(known_image)[0]
+            known_face_encodings[tuple(image_encoding.flatten())] = row['id']
+        except binascii.Error as e:
+            print(e)
+        
+        print()
+
+
+except Exception as e:
+    print(f"Error: {e}")
+
+finally:
+    # Close the result set
+    if 'result' in locals():
+        result.close()
+
+    # Close the engine
+    engine.dispose()
+
+
         
 # for file in os.listdir(filepath):
 #     filename = os.fsdecode(file)
