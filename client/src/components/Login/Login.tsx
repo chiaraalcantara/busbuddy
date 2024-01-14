@@ -51,10 +51,12 @@ const Login = () => {
     }
   
     return (
-        <section className="login section items-center">
-            <div className='flex flex-col items-center justify-center'>            
-                <h1 className='text-lg font-semibold'>{!user ? 'Login' : 'Logout'}</h1>
-                {!user ? (
+        <section>
+            <div className='w-fit flex flex-col items-center justify-center'>
+            <section className="login section items-center">
+                <div className='flex flex-col items-center justify-center'>            
+                    <h1 className='text-lg font-semibold'>{!user ? 'Login' : 'Logout'}</h1>
+                    {!user ? (
                         <Button 
                             onClick={signInUser}
                             shape="round" icon={<GoogleOutlined />} size={'large'}>
@@ -67,10 +69,11 @@ const Login = () => {
                             Sign out of Google
                         </Button>
                     )   
-                }
+                    }
+                </div>
+            </section>
             </div>
         </section>
-
     );
   };
   
