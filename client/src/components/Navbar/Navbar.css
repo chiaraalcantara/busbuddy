@@ -1,4 +1,5 @@
 header {
-    background: rgb(193, 236, 239);
+    /*background: rgb(193, 236, 239);*/
+    background: linear-gradient(to right, rgb(193, 236, 239), rgb(248, 182, 248));
     z-index: 99999999999;
 }

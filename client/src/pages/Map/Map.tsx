@@ -11,14 +11,14 @@ const Map = () => {
                 <h1 className="text-3xl font-bold mb-4">Bus Routes</h1>
                 <Collapse
                     size="large"
-                    defaultActiveKey={['0']}
+                    // defaultActiveKey={['0']}
                     className="w-1/2"
                     ghost
                 >
                     {busRoutes.map((route, index) => (
                         <Panel 
                         //hover:bg-gray-100
-                            className="mb-4 rounded-md bg-gray-100 outline-width=thin outline hover:scale-105 transition duration-300 ease-in-out hover:shadow-lg"
+                            className="mb-4 rounded-md bg-gray-100 outline hover:scale-105 transition duration-300 ease-in-out hover:shadow-lg"
                             header={route.name} 
                             key={index}
                             >

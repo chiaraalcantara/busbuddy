@@ -192,7 +192,7 @@ const BusRegistration = () => {
 
                     <Form.Item>
                         <Button 
-                            className="bg-green-400 text-white font-semibold rounded-md hover:bg-green-500 items-center justify-center"
+                            className="flex bg-green-400 text-white font-semibold rounded-md hover:bg-green-500 items-center justify-items-center"
                             htmlType="submit"
                         >
                             Register
