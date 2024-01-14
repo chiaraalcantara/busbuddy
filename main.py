@@ -92,17 +92,19 @@ while True:
                         db_bus, db_stop, name, on_bus = rows[0]
                         prompt = ""
                         print("on bus value is" + str(on_bus))
-                        update_statement = f"UPDATE busdata SET on_bus = 'False' WHERE id = {matched_id}"
-                        #     # Execute the update statement
-                        engine.execute(update_statement)
+
+                        # # Default value should always be False #TODO We Can leave True and False so the front end
+                        # # can keep track real time the whereabouts of their child 
+                        # update_statement = f"UPDATE busdata SET on_bus = 'False' WHERE id = {matched_id}"
+                        # # Execute the update statement
+                        # engine.execute(update_statement)
 
                         # Not on bus yet means we check if they are getting on the right bus
                         if not on_bus :
                             if db_bus != 29:
-                                # TODO Window Text
-                                print('wrong bus')
+                                print("Wrong Bus " + name + "!")
                                 text = "Wrong Bus " + name + "!"
-                                cv2.putText(frame, text, (175, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+                                cv2.putText(frame, text, (50, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
                                 cv2.imshow("test", frame)
                                 cv2.waitKey(1000)
                                 break
@@ -114,11 +116,10 @@ while True:
                             prompt = "Welcome "
                         # On the bus, means we are checking if they are getting off the right stop
                         elif on_bus :
-                            if db_stop != stop:
-                                # TODO Window Text
-                                print('wrong stop')
+                            if db_stop != stop :
+                                print("Wrong Stop " + name + "!")
                                 text = "Wrong Stop " + name + "!"
-                                cv2.putText(frame, text, (175, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+                                cv2.putText(frame, text, (50, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
                                 cv2.imshow("test", frame)
                                 cv2.waitKey(1000)
                                 break
