@@ -1,9 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar/Navbar';
-import Login from './components/Login/Login';
 import './App.css';
-import UserProvider from './components/Contexts/UserProvider';
-
+import Navbar from './components/Navbar/Navbar';
+import Map from './pages/Map/Map';
+import BusRegistration from './pages/BusRegistration/BusRegistration';
 
 function App() {
 
@@ -14,9 +13,8 @@ function App() {
           <Navbar />
           <Routes>
             {/* <Route path="/" element={<Home />} /> */}
-            {/* <Route path="/map" element={<Map />} /> */}
-            {/* <Route path="/register" element={<Register />} /> */}
-            <Route path="/login" element={<Login />} />
+            <Route path="/map" element={<Map />} />
+            <Route path="/bus-register" element={<BusRegistration />} />
           </Routes>
         </div>
       </Router>
