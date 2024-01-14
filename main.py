@@ -2,6 +2,40 @@ import face_recognition
 import cv2
 import os
 from os import listdir
+from sqlalchemy import create_engine
+
+# railway url
+railway_database_url = "postgresql://postgres:3df35D-fc6ECd4g151d-Agdc25gAC3F6@viaduct.proxy.rlwy.net:53889/railway"
+
+# create the SQLAlchemy engine
+engine = create_engine(railway_database_url)
+
+# execute a SELECT query to fetch "id" and "encoded_image" (should be BYTEA) from "busdata"
+query = "SELECT id, encoded_image FROM busdata"
+
+try:
+    result = engine.execute(query)
+
+    # Fetch all rows
+    rows = result.fetchall()
+
+    # Print the "id" and "encoded_image" fields for each row
+    for row in rows:
+        print(f"ID: {row['id']}")
+        print(f"Encoded Image: {row['encoded_image']}")
+        print()
+
+except Exception as e:
+    print(f"Error: {e}")
+
+finally:
+    # Close the result set
+    if 'result' in locals():
+        result.close()
+
+    # Close the engine
+    engine.dispose()
+
 
 #   TODO Import images from database 
 
