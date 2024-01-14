@@ -90,30 +90,49 @@ while True:
                         result = engine.execute(query)
                         rows = result.fetchall()
                         db_bus, db_stop, name, on_bus = rows[0]
+                        prompt = ""
+                        print("on bus value is" + str(on_bus))
+                        # update_statement = f"UPDATE busdata SET on_bus = 'False' where id = {matched_id};"
+                        # #     # Execute the update statement
+                        # engine.execute(update_statement)
 
-                        # Not on bus yet means we check if they are getting on the right bus
-                        if not on_bus :
-                            print("hi")
-                            if db_bus != 29:
-                                # TODO Window Text
-                                print('wrong bus')
-                                break
-                            on_bus = True # TODO HELENA CHANGE THE VALUE OF ONBUS
-                            prompt = "Welcome "
-                        # On the bus, means we are checking if they are getting off the right stop
-                        elif on_bus :
-                            if db_stop != stop:
-                                # TODO Window Text
-                                print('wrong stop')
-                                break
-                            on_bus = False  # TODO HELENA CHANGE THE VALUE OF ONBUS
-                            prompt = "Goodbye "
-                    
+                        # # Not on bus yet means we check if they are getting on the right bus
+                        # if not on_bus :
+                        #     if db_bus != 29:
+                        #         # TODO Window Text
+                        #         print('wrong bus')
+                        #         text = "Wrong Bus " + name + "!"
+                        #         cv2.putText(frame, text, (175, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+                        #         cv2.imshow("test", frame)
+                        #         cv2.waitKey(1000)
+                        #         break
+
+                        #     update_statement = f"UPDATE busdata SET on_bus = 'True' where id = {matched_id};"
+                        #     # Execute the update statement
+                        #     engine.execute(update_statement)
+
+                        #     prompt = "Welcome "
+                        # # On the bus, means we are checking if they are getting off the right stop
+                        # elif on_bus :
+                        #     if db_stop != stop:
+                        #         # TODO Window Text
+                        #         print('wrong stop')
+                        #         text = "Wrong Stop " + name + "!"
+                        #         cv2.putText(frame, text, (175, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+                        #         cv2.imshow("test", frame)
+                        #         cv2.waitKey(1000)
+                        #         break
+
+                        #     update_statement = f"UPDATE busdata SET on_bus = 'False' where id = {matched_id};"
+                        #     # Execute the update statement
+                        #     engine.execute(update_statement)
+
+                        #     prompt = "Goodbye "
                     except Exception as e:
                         print(f"Error: {e}")
                     # At this point, this means the student is getting on the right bus or getting off at the right stop
                     text = prompt + name + "!"
-                    cv2.putText(frame, text, (175, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+                    cv2.putText(frame, text, (50, 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
                     cv2.imshow("test", frame)
                     cv2.waitKey(3000)
         else:
