@@ -51,26 +51,28 @@ const Login = () => {
     }
   
     return (
-        <section className="login section items-center">
+        <section className="login section items-center h-screen mt-80">
             <div className='flex flex-col items-center justify-center'>            
-                <h1 className='text-lg font-semibold'>{!user ? 'Login' : 'Logout'}</h1>
+                <h1 className='text-xl font-semibold mb-4'>{!user ? 'Login' : 'Logout'}</h1>
                 {!user ? (
-                        <Button 
-                            onClick={signInUser}
-                            shape="round" icon={<GoogleOutlined />} size={'large'}>
-                            Sign in with Google
-                        </Button>
-                   ) : (
-                        <Button 
-                            onClick={logOutUser}
-                            shape="round" icon={<GoogleOutlined />} size={'large'}>
-                            Sign out of Google
-                        </Button>
-                    )   
-                }
+                    <Button 
+                        onClick={signInUser}
+                        className="bg-blue-500 hover:bg-blue-700 hover:text-white text-white font-bold py-2 px-4 rounded"
+                        type="ghost"
+                        shape="round" icon={<GoogleOutlined />} size={'large'}>
+                        Sign in with Google
+                    </Button>
+                ) : (
+                    <Button 
+                        onClick={logOutUser}
+                        className="bg-blue-500 hover:bg-blue-700 hover:text-white text-white font-bold py-2 px-4 rounded"
+                        type="ghost"
+                        shape="round" icon={<GoogleOutlined />} size={'large'}>
+                        Sign out of Google
+                    </Button>
+                )}
             </div>
         </section>
-
     );
   };
   
