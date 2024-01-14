@@ -1,4 +1,5 @@
-// import React from 'react';
+import { useContext } from 'react';
+import UserContext from '../Contexts/UserContext';
 import './Navbar.css';
 
 const links = [
@@ -10,6 +11,15 @@ const links = [
 
 // some use context for the register and the child profile
 const Navbar = () => {
+
+    const { user } = useContext(UserContext);
+
+       // Function to determine if a link should be shown based on user state
+       const shouldShowLink = (title) => {
+        if (user) return true; // logged in users can see all
+        return title === 'Home' || title === 'Login'; // not logged in users see Home and Login
+    };
+
     return (
         // the green and w/o is just temp chnage later
         //bg-green-300 shadow-xl
@@ -17,7 +27,7 @@ const Navbar = () => {
             <nav className='flex justify-between container items-center gap-x-4 px-4 h-[70px]'>
                 <h1 className="font-bold text-lg">Magic School Bus xD</h1>
                 <ul className="flex gap-x-8">
-                    {links.map((link, index) => (
+                    {links.filter(link => shouldShowLink(link.title)).map((link, index) => (
                         <li key={index}>
                             <a href={link.href} className="hover:underline font-semibold">{link.title}</a>
                         </li>

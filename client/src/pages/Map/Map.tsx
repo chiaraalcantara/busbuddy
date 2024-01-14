@@ -8,7 +8,8 @@ const Map = () => {
     return (
         <section className="map section">
             <div className="flex flex-col items-center justify-center ">
-                <h1 className="text-3xl font-bold mb-4">Bus Routes</h1>
+                <h1 className="text-3xl font-semibold mb-4">Bus Routes</h1>
+                <h1 className="mb-4"> A list of bus routes that gets students to their schools, all busses leave at 6:45 am EST!</h1>
                 <Collapse
                     size="large"
                     // defaultActiveKey={['0']}
