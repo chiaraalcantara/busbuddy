@@ -1,3 +1,9 @@
+/*
+* {
+  background: linear-gradient(to right, #8360c3, #2ebf91);
+}
+*/
+
 ul {
   list-style: none;
 }
@@ -25,8 +31,10 @@ img {
 
 /* UTILITIES */
 .section {
-  padding: 4rem 0 3rem;
+  /*background: linear-gradient(to right, #8360c3, #2ebf91);*/
+  padding: 6rem 0 3rem;
   margin: auto;
+  /*height: 100vh;*/
 }
 
 .section__title {
