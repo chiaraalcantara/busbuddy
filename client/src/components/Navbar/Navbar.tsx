@@ -23,9 +23,9 @@ const Navbar = () => {
     return (
         // the green and w/o is just temp chnage later
         //bg-green-300 shadow-xl
-        <header className="w-full fixed top-0 left-0 z-1000">
-            <nav className='flex justify-between container items-center gap-x-4 px-4 h-[70px]'>
-                <h1 className="font-bold text-lg">Magic School Bus xD</h1>
+        <header className="w-full fixed top-0 left-0 z-1000 shadow-lg">
+            <nav className='flex justify-between container items-center gap-x-4 px-4 h-[70px] '>
+                <h1 className="font-bold text-xl">BusBuddy</h1>
                 <ul className="flex gap-x-8">
                     {links.filter(link => shouldShowLink(link.title)).map((link, index) => (
                         <li key={index}>
