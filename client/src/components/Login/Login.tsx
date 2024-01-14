@@ -51,7 +51,7 @@ const Login = () => {
     }
   
     return (
-        <section className="login section items-center h-screen mt-80">
+        <section className="login section items-center h-screen mt-60">
             <div className='flex flex-col items-center justify-center'>            
                 <h1 className='text-xl font-semibold mb-4'>{!user ? 'Login' : 'Logout'}</h1>
                 {!user ? (
