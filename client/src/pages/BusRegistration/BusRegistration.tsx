@@ -21,7 +21,7 @@ const BusRegistration = () => {
 
     const handleBusNumberChange = (value : any) => {
         setSelectedBusName(value);
-        form.resetFields(['busStop']); // Reset subsequent fields
+        form.resetFields(['busStop']); 
     };
 
     const [formValues, setFormValues] = useState<FormValues>({
@@ -92,21 +92,7 @@ const BusRegistration = () => {
                 message.error('Your image must be smaller than 2MB!');
                 return Upload.LIST_IGNORE;
             }
-            
-            // const reader = new FileReader();
-            // reader.onload = () => {
-            //     const base64String = reader.result;
 
-            //     setFormValues((prevValues) => ({
-            //         ...prevValues,
-            //         studentImages: base64String,
-            //     }));
-            // };
-            // reader.onerror = (error) => {
-            //     console.log('Error: ', error);
-            // }
-            // reader.readAsDataURL(file);
-            // return false;
             const reader = new FileReader();
             reader.onload = () => {
                 setStudentImageBase64(reader.result as string);
