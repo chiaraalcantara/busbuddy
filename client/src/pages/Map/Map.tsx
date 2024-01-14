@@ -8,16 +8,18 @@ const Map = () => {
     return (
         <section className="map section">
             <div className="flex flex-col items-center justify-center ">
-                <h1 className="text-lg font-semibold">Bus Routes</h1>
+                <h1 className="text-3xl font-semibold mb-4">Bus Routes</h1>
+                <h1 className="mb-4"> A list of bus routes that gets students to their schools, all busses leave at 6:45 am EST!</h1>
                 <Collapse
                     size="large"
-                    defaultActiveKey={['0']}
+                    // defaultActiveKey={['0']}
                     className="w-1/2"
                     ghost
                 >
                     {busRoutes.map((route, index) => (
                         <Panel 
-                            className="hover:bg-gray-100 hover:scale-105 transition duration-300 ease-in-out hover:shadow-lg"
+                        //hover:bg-gray-100
+                            className="mb-4 rounded-md bg-gray-100 outline hover:scale-105 transition duration-300 ease-in-out hover:shadow-lg"
                             header={route.name} 
                             key={index}
                             >
@@ -27,7 +29,7 @@ const Map = () => {
                             />
                         </Panel>
                     ))}
-                </Collapse>;
+                </Collapse>
             </div>
         </section>
     );
