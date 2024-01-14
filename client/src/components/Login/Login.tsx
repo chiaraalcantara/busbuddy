@@ -7,9 +7,13 @@ import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, googleAuthProvider, db } from "../../utils/firebaseConfig";
 import React, { useContext, useState } from "react";
 import UserContext from "../Contexts/UserContext"
+import { useNavigate } from 'react-router-dom';
+
 
 const Login = () => {
     const { user, setUser } = useContext(UserContext);
+    const navigate = useNavigate();
+
 
     const logOutUser = async () => {
         try{
@@ -40,7 +44,8 @@ const Login = () => {
                 await setDoc(ref, { ...userObj });
               }
               setUser({ ...userObj });
-        } catch (error) {
+              navigate('/');
+            } catch (error) {
             console.log(error);
         }
     }
@@ -48,17 +53,21 @@ const Login = () => {
     return (
         <section className="login section items-center">
             <div className='flex flex-col items-center justify-center'>            
-                <h1 className='text-lg font-semibold'>Login Here</h1>
-                <Button 
-                    onClick={signInUser}
-                    shape="round" icon={<GoogleOutlined />} size={'large'}>
-                    Sign in with Google
-                </Button>
-                <Button 
-                    onClick={logOutUser}
-                    shape="round" icon={<GoogleOutlined />} size={'large'}>
-                    Sign out of Google
-                </Button>
+                <h1 className='text-lg font-semibold'>{!user ? 'Login' : 'Logout'}</h1>
+                {!user ? (
+                        <Button 
+                            onClick={signInUser}
+                            shape="round" icon={<GoogleOutlined />} size={'large'}>
+                            Sign in with Google
+                        </Button>
+                   ) : (
+                        <Button 
+                            onClick={logOutUser}
+                            shape="round" icon={<GoogleOutlined />} size={'large'}>
+                            Sign out of Google
+                        </Button>
+                    )   
+                }
             </div>
         </section>
 

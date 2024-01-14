@@ -3,17 +3,21 @@ import UserContext from '../Contexts/UserContext';
 import './Navbar.css';
 import React from 'react';
 
-const links = [
-    { title: 'Home', href: '/' },
-    { title: 'Map', href: '/map' },
-    { title: 'Bus Register', href: '/bus-register'},
-    { title: 'Login', href: '/login' },
-];
+
 
 // some use context for the register and the child profile
 const Navbar = () => {
 
     const { user } = useContext(UserContext);
+
+    const userTitle = !user ? 'Login' : 'Logout';
+
+    const links = [
+        { title: 'Home', href: '/' },
+        { title: 'Map', href: '/map' },
+        { title: 'Bus Register', href: '/bus-register'},
+        { title: userTitle, href: '/login' },
+    ];
 
        // Function to determine if a link should be shown based on user state
        const shouldShowLink = (title) => {

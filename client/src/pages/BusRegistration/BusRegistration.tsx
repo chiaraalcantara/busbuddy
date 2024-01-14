@@ -110,7 +110,7 @@ const BusRegistration = () => {
         <section className="bus section">
             <div className="flex flex-col items-center justify-center ">
                 <h2 className="text-3xl font-bold mb-4">Bus Registration</h2>
-                <h3 className="text-sm font-semibold mb-4">Register your child for the bus. more filler text here...</h3>
+                <h3 className="mb-4">Register your child for the bus.</h3>
                 <Form 
                     form={form}
                     layout="vertical"
@@ -178,7 +178,7 @@ const BusRegistration = () => {
                     >
                         <Dragger {...props} 
                             maxCount={1} 
-                            className='h-42 w-42'>
+                            className='h-42 w-42 bg-black'>
                             <p className="ant-upload-drag-icon flex items-center justify-center">
                                 {/*text-green-300*/}
                                 <FaUpload className="text-4xl"/>
