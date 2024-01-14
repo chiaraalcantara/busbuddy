@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import UserContext from '../Contexts/UserContext';
 import './Navbar.css';
+import React from 'react';
 
 const links = [
     { title: 'Home', href: '/' },
@@ -38,4 +39,5 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+// eslint-disable-next-line react-refresh/only-export-components
+export default React.memo(Navbar);
