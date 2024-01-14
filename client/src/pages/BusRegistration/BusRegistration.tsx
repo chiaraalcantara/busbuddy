@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Upload, Form, Input, Select, message, Button } from "antd";
 import { busNames, busRoutes } from "../../utils/constants";
 import { FaUpload } from 'react-icons/fa';
+import { v4 as uuidv4 } from 'uuid';
+import axios from "axios";
 
 type FormValues = {
     studentFirstName: string;
@@ -17,6 +19,7 @@ const BusRegistration = () => {
 
     const [selectedBusName, setSelectedBusName] = useState(null);
     const [studentImageBase64, setStudentImageBase64] = useState<string | null>(null);
+    const BACKEND_URL = "http://localhost:5000"
 
 
     const handleBusNumberChange = (value : any) => {
@@ -51,16 +54,25 @@ const BusRegistration = () => {
 
         // when sendign to db, do values.busNumber -> .split(" ")[1] to gt the number
         const submissionData = {
-            ...values,
-            busNumber: values.busNumber.split(" ")[1],
-            busStop: busStopValue,
-            studentImages: studentImageBase64,
+            id: uuidv4(),
+            student_name: values.studentFirstName + " " + values.studentLastName,
+            encoded_image: studentImageBase64?.split(",")[1],
+            bus_number: Number(values.busNumber.split(" ")[1]),
+            bus_stop: busStopValue,
+            // on bus? default to false
         };
+
         console.log("Received values of form: ", submissionData);
     
         // filter the results if needed here with if (values.field === ....); erorrMsg return;
-
         // upload the data to the DB here\
+        try {
+            axios.post(`${BACKEND_URL}/add_row`, submissionData);
+            message.success("Successfully registered new bus passenger!");
+        } catch (error) {
+            console.log(error);
+            message.error("Failed to register new bus passenger, try again!");
+        }
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
