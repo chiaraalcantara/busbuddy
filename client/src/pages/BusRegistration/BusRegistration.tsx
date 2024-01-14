@@ -123,7 +123,7 @@ const BusRegistration = () => {
                     }}
                 >
                     <Form.Item 
-                        label={<p className="font-semibold">Student First Name</p>}
+                        label={<p className="text-base font-semibold">Student First Name</p>}
                         name="studentFirstName"
                         rules={[{ validator: customValidator("Please enter your child's first name!") }]}   
                     >
@@ -131,14 +131,14 @@ const BusRegistration = () => {
                     </Form.Item>
                  
                     <Form.Item 
-                        label={<p className="font-semibold"> Student Last Name </p>}
+                        label={<p className="text-base font-semibold"> Student Last Name </p>}
                         name="studentLastName" 
                         rules={[{ validator: customValidator("Please enter your child's last name!") }]}   
                     >
                         <Input className="border border-gray-400 pl-3 py-1 rounded-2xl" placeholder="Smith"/>
                     </Form.Item>
 
-                    <Form.Item label="Bus Number" 
+                    <Form.Item label={<p className="text-base font-semibold">Bus Number</p>}
                         name="busNumber" 
                         className="font-semibold"
                         rules={[{ validator: customValidator("Please select a bus route!") }]}   
@@ -153,7 +153,7 @@ const BusRegistration = () => {
                     </Form.Item>
 
                     <Form.Item 
-                        label="Bus Stop" 
+                        label={<p className="text-base font-semibold">Bus Stop</p>}
                         name="busStop" 
                         className="font-semibold"
                         rules={[{ validator: customValidator("Please select a bus stop!") }]}   
@@ -172,7 +172,7 @@ const BusRegistration = () => {
                     </Form.Item>
 
                     <Form.Item 
-                         label="Student Image" 
+                         label={<p className="text-base font-semibold">Student Image</p>}
                          name="studentImages" 
                          className="font-semibold"
                     >

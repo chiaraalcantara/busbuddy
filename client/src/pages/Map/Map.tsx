@@ -19,8 +19,7 @@ const Map = () => {
                     {busRoutes.map((route, index) => (
                         <Panel 
                         //hover:bg-gray-100
-                            // change the styling here
-                            className="hover:bg-gray-400 transition duration-300 ease-in-out hover:shadow-lg"
+                            className="mb-4 rounded-md bg-gray-100 outline-width=thin outline hover:scale-105 transition duration-300 ease-in-out hover:shadow-lg"
                             header={route.name} 
                             key={index}
                             >
