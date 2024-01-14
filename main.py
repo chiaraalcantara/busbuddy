@@ -1,3 +1,34 @@
+from flask import Flask, Response
+import cv2
+import face_recognition
+import base64
+import binascii
+# from sqlalchemy import create_engine
+
+
+# from flask import Flask, render_template, Response
+# from camera import VideoCamera
+
+# app = Flask(__name__)
+
+# @app.route('/')
+# def index():
+#     return render_template('index.js')
+    
+# def gen(camera):
+#     while True:
+#         frame = camera.get_frame()
+#         yield (b'--frame\r\n'
+#                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+               
+# @app.route('/video_feed')
+# def video_feed():
+#     return Response(gen(VideoCamera()),
+#                     mimetype='multipart/x-mixed-replace; boundary=frame')
+
+# if __name__ == '__main__':
+#     app.run(host='0.0.0.0', port=5000, threaded=True, use_reloader=False)
+    
 import face_recognition
 import cv2
 import os
@@ -5,8 +36,8 @@ from sqlalchemy import create_engine
 import base64
 import binascii
 
-from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
+# from flask import Flask, request, jsonify
+# from flask_sqlalchemy import SQLAlchemy
 
     
 # Set Default Filepath
@@ -29,8 +60,6 @@ engine = create_engine(railway_database_url)
 
 # execute a SELECT query to fetch "id" and "encoded_image" from "busdata"
 query = "SELECT id, encoded_image FROM busdata"
-
-
 
 try:
     result = engine.execute(query)
@@ -154,44 +183,4 @@ while True:
 engine.dispose()
 cam.release()
 cv2.destroyAllWindows()
-
-app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:6363c1f1Ad3Cec2DAEeDgF23da42AdAD@viaduct.proxy.rlwy.net:41175/railway'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
-
-class BusData(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    student_name = db.Column(db.String(255), nullable=True)
-    encoded_image = db.Column(db.String, nullable=True)
-    bus_number = db.Column(db.Integer, nullable=True)
-    stop_number = db.Column(db.Integer, nullable=True)
-    on_bus = db.Column(db.Boolean, default=False) 
-
-# Create the table
-with app.app_context():
-    db.create_all()
-
-# Define a route for adding a new row
-@app.route('/add_row', methods=['POST'])
-def add_row():
-    try:
-        # Get data from the request
-        data = request.get_json()
-
-        # Create a new BusData object
-        new_row = BusData(**data)
-
-        # Add the new row to the database
-        db.session.add(new_row)
-        db.session.commit()
-
-        return jsonify({'message': 'Row added successfully'}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-if __name__ == '__main__':
-    app.run(debug=True)
 
