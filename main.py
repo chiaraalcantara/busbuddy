@@ -111,24 +111,16 @@ while True:
 					db_bus, db_stop, name, on_bus = rows[0]
 
 					if (on_bus):
-						print('add chiara')
 						# add logic for checking if on the bus/not etc 
 						on_bus = not on_bus
-							# Print the "id" and "encoded_image" fields for each row
-					
-					print('bus number', db_bus)
-					print('bus nusmss', bus_number)
-					if (db_bus != bus_number):
+						# TODO Add text to screen 
+					elif (db_bus != bus_number):
 						print('wrong bus')
-					print('idiot', db_stop)
-					print('yeuck', stop)
-					if (db_stop != stop):
+						# TODO Add text to screen 
+					elif (db_stop != stop):
 						print('wrong stop')
-			
-					# Check if getting on the bus, if it is the right bus
-					# Check if getting off the bus, if it is the right stop
-					else: 
-						on_bus = not on_bus
+						
+				
 				except Exception as e:
 					print(f"Error: {e}")
 				
