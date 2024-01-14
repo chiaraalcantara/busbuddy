@@ -1,14 +1,12 @@
 import './Login.css';
-
-
 import { GoogleOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
-import { signInWithPhoneNumber, signInWithPopup, signOut } from "firebase/auth";
+import { signInWithPopup, signOut } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { auth, googleAuthProvider, db } from "../../utils/firebaseConfig";
 import React, { useContext, useState } from "react";
-import UserContext from "../userContext"
+import UserContext from "../Contexts/UserContext"
 
 const Login = () => {
     const { user, setUser } = useContext(UserContext);
@@ -16,7 +14,7 @@ const Login = () => {
     const logOutUser = async () => {
         try{
             await signOut(auth);
-        }catch (error){
+        } catch (error){
             console.log(error);
         }
     }
