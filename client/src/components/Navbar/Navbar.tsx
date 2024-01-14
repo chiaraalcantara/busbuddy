@@ -4,6 +4,7 @@ import './Navbar.css';
 const links = [
     { title: 'Home', href: '/' },
     { title: 'Map', href: '/map' },
+    { title: 'Bus Register', href: '/bus-register'},
     { title: 'Login', href: '/login' },
 ];
 
