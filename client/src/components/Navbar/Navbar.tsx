@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import UserContext from '../Contexts/UserContext';
 import './Navbar.css';
+import React from 'react';
 
 const links = [
     { title: 'Home', href: '/' },
@@ -21,13 +22,15 @@ const Navbar = () => {
     };
 
     return (
-        <header className="w-full fixed top-0 left-0 z-auto bg-green-300 shadow-xl">
-            <nav className='flex justify-between container items-center gap-x-4 px-4 h-[50px]'>
-                <h1 className="font-bold text-lg">Magic School Bus xD</h1>
+        // the green and w/o is just temp chnage later
+        //bg-green-300 shadow-xl
+        <header className="w-full fixed top-0 left-0 z-1000 shadow-lg">
+            <nav className='flex justify-between container items-center gap-x-4 px-4 h-[70px] '>
+                <h1 className="font-bold text-xl">BusBuddy</h1>
                 <ul className="flex gap-x-8">
                     {links.filter(link => shouldShowLink(link.title)).map((link, index) => (
                         <li key={index}>
-                            <a href={link.href} className="font-semibold">{link.title}</a>
+                            <a href={link.href} className="hover:underline font-semibold">{link.title}</a>
                         </li>
                     ))}
                 </ul>
@@ -36,4 +39,5 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;
+// eslint-disable-next-line react-refresh/only-export-components
+export default React.memo(Navbar);
