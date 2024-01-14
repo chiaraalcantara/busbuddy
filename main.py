@@ -8,44 +8,6 @@ import binascii
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:6363c1f1Ad3Cec2DAEeDgF23da42AdAD@viaduct.proxy.rlwy.net:41175/railway'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
-
-class BusData(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    student_name = db.Column(db.String(255), nullable=True)
-    encoded_image = db.Column(db.String, nullable=True)
-    bus_number = db.Column(db.Integer, nullable=True)
-    stop_number = db.Column(db.Integer, nullable=True)
-    on_bus = db.Column(db.Boolean, default=False) 
-
-# Create the table
-db.create_all()
-
-# Define a route for adding a new row
-@app.route('/add_row', methods=['POST'])
-def add_row():
-    try:
-        # Get data from the request
-        data = request.get_json()
-
-        # Create a new BusData object
-        new_row = BusData(**data)
-
-        # Add the new row to the database
-        db.session.add(new_row)
-        db.session.commit()
-
-        return jsonify({'message': 'Row added successfully'}), 200
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-if __name__ == '__main__':
-    app.run(debug=True)
     
 # Set Default Filepath
 filepath = "./Images"
@@ -67,6 +29,8 @@ engine = create_engine(railway_database_url)
 
 # execute a SELECT query to fetch "id" and "encoded_image" from "busdata"
 query = "SELECT id, encoded_image FROM busdata"
+
+
 
 try:
     result = engine.execute(query)
@@ -190,3 +154,44 @@ while True:
 engine.dispose()
 cam.release()
 cv2.destroyAllWindows()
+
+app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:6363c1f1Ad3Cec2DAEeDgF23da42AdAD@viaduct.proxy.rlwy.net:41175/railway'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class BusData(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    student_name = db.Column(db.String(255), nullable=True)
+    encoded_image = db.Column(db.String, nullable=True)
+    bus_number = db.Column(db.Integer, nullable=True)
+    stop_number = db.Column(db.Integer, nullable=True)
+    on_bus = db.Column(db.Boolean, default=False) 
+
+# Create the table
+with app.app_context():
+    db.create_all()
+
+# Define a route for adding a new row
+@app.route('/add_row', methods=['POST'])
+def add_row():
+    try:
+        # Get data from the request
+        data = request.get_json()
+
+        # Create a new BusData object
+        new_row = BusData(**data)
+
+        # Add the new row to the database
+        db.session.add(new_row)
+        db.session.commit()
+
+        return jsonify({'message': 'Row added successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
