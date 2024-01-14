@@ -14,18 +14,20 @@ const Navbar = () => {
 
     const { user } = useContext(UserContext);
 
+       // Function to determine if a link should be shown based on user state
+       const shouldShowLink = (title) => {
+        if (user) return true; // logged in users can see all
+        return title === 'Home' || title === 'Login'; // not logged in users see Home and Login
+    };
 
     return (
-        // the green and w/o is just temp chnage later 
         <header className="w-full fixed top-0 left-0 z-auto bg-green-300 shadow-xl">
-            <nav className='flex justify- container items-center gap-x-4 px-4 h-[50px]'>
+            <nav className='flex justify-between container items-center gap-x-4 px-4 h-[50px]'>
                 <h1 className="font-bold text-lg">Magic School Bus xD</h1>
                 <ul className="flex gap-x-8">
-                    {links.map((link, index) => (
+                    {links.filter(link => shouldShowLink(link.title)).map((link, index) => (
                         <li key={index}>
-                            {user && (
-                                <a href={link.href} className="font-semibold">{link.title}</a>
-                            )}
+                            <a href={link.href} className="font-semibold">{link.title}</a>
                         </li>
                     ))}
                 </ul>
