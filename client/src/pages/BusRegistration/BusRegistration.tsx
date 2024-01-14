@@ -180,7 +180,8 @@ const BusRegistration = () => {
                             maxCount={1} 
                             className='h-42 w-42'>
                             <p className="ant-upload-drag-icon flex items-center justify-center">
-                                <FaUpload className="text-4xl text-green-300"/>
+                                {/*text-green-300*/}
+                                <FaUpload className="text-4xl"/>
                             </p>
                             <p className="ant-upload-text p-1 font-medium">Click or drag file to upload</p>
                             <p className="ant-upload-hint px-10">

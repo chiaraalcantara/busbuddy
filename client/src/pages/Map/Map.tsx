@@ -8,7 +8,7 @@ const Map = () => {
     return (
         <section className="map section">
             <div className="flex flex-col items-center justify-center ">
-                <h1 className="text-lg font-semibold">Bus Routes</h1>
+                <h1 className="text-lg font-semibold mb-4">Bus Routes</h1>
                 <Collapse
                     size="large"
                     defaultActiveKey={['0']}
@@ -17,7 +17,8 @@ const Map = () => {
                 >
                     {busRoutes.map((route, index) => (
                         <Panel 
-                            className="hover:bg-gray-100 hover:scale-105 transition duration-300 ease-in-out hover:shadow-lg"
+                        //hover:bg-gray-100
+                            className="hover:outline hover:scale-105 transition duration-300 ease-in-out hover:shadow-lg"
                             header={route.name} 
                             key={index}
                             >
