@@ -12,7 +12,7 @@ const Map = () => {
                 <h1 className="mb-4"> A list of bus routes that gets students to their schools, all busses leave at 6:45 am EST!</h1>
                 <Collapse
                     size="large"
-                    // defaultActiveKey={['0']}
+                    // defaultActiveKey={['0']}     
                     className="w-1/2"
                     ghost
                 >
