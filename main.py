@@ -106,7 +106,7 @@ while True:
                                 # TODO Window Text
                                 print('wrong stop')
                                 break
-                            on_bus = False
+                            on_bus = False  # TODO HELENA CHANGE THE VALUE OF ONBUS
                             prompt = "Goodbye "
                     
                     except Exception as e:
